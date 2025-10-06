@@ -14,6 +14,8 @@ body{
   flex-direction:column;
   background:black;
   color:white;
+  font-family: Arial, sans-serif;
+  color : cyan;
 }
 
 form{
@@ -106,8 +108,9 @@ border : 2px solid white;
 <p class="message">
     ${msg}
 </p>
-
-
+<p>Example : </p>
+<p>email : loki@gmail.com</p>
+<p>password : loki123</p>
 </form>
 
 

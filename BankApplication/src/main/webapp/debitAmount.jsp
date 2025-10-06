@@ -16,7 +16,8 @@ body{
   align-items:center;
   flex-direction:column;
   background:black;
-  color:white;
+  font-family: Arial, sans-serif;
+  color : cyan;
 }
 
 form{

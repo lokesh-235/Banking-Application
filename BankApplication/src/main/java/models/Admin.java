@@ -1,5 +1,9 @@
 package models;
 
+import java.sql.*;
+
+import BankApplication.connection;
+
 public class Admin {
 	private int eid;
 	private String name;
@@ -42,8 +46,57 @@ public class Admin {
 		return phoneNumber;
 	}
 	
+	public static Admin getAdminByEmail(String email) {
+		Connection con = connection.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql_stmt = "SELECT * from employee WHERE email=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql_stmt);
+			pstmt.setString(1, email);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return createAdmin(rs);
+			}
+			else {
+				return null;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static Admin createAdmin(ResultSet rs) {
+		// TODO Auto-generated method stub
+		
+		try {
+			
+			int eid = rs.getInt("eid");
+			String nameFromDB = rs.getString("name");
+			String userNameFromDB = rs.getString("username");
+			String emailFromDB = rs.getString("email");
+			String passwordFromDB = rs.getString("password");
+			String phoneNumberFromDB = rs.getString("phoneno");
+			
+			Admin admin = new Admin(eid,nameFromDB,userNameFromDB,emailFromDB,passwordFromDB,phoneNumberFromDB);
+			
+			return admin;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	public String toString() {
 		return "Name : "+name+"\nEmail : "+email+"\nUser Name : "+userName+"\nPhone Number : "+phoneNumber;
 	}
+	
+	
 }

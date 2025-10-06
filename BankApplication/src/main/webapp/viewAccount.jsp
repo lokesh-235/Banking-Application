@@ -25,7 +25,7 @@ h2, h3 {
 
 .details {
   display:flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 20px;
 }

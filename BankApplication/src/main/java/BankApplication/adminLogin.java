@@ -3,6 +3,7 @@ package BankApplication;
 import jakarta.servlet.RequestDispatcher;
 
 
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -56,22 +57,13 @@ public class adminLogin extends HttpServlet {
 		}
 
 		
-		Connection con = connection.getConnection();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
-		String sql_stmt = "SELECT * from employee WHERE email=?";
-		try {
-			pstmt = con.prepareStatement(sql_stmt);
-			pstmt.setString(1, email);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				String passwordFromDB = rs.getString("password");
-				if(password.equals(passwordFromDB)) {
+		Admin admin = Admin.getAdminByEmail(email);
+		
+		
+				if(password.equals(admin.getPassword())) {
 					
-					Admin admin = createAdmin(rs);
+					
 					System.out.println(admin);
 					HttpSession session = request.getSession();
 					session.setAttribute("admin", admin);
@@ -88,46 +80,6 @@ public class adminLogin extends HttpServlet {
 				}
 			}
 			
-			else {
-				request.setAttribute("msg", "Invalid email/password");
-				doGet(request,response);
-			}
-			
-		} catch(SQLException e) {
-			request.setAttribute("msg", "Error in Database!");
-			
-		}
-		finally {
-			try {
-				con.close();
-				pstmt.close();
-				rs.close();
-			} catch(SQLException e) {e.printStackTrace();}
-		}
-	}
-
-	private Admin createAdmin(ResultSet rs) {
-		// TODO Auto-generated method stub
-		
-		try {
-			
-			int eid = rs.getInt("eid");
-			String nameFromDB = rs.getString("name");
-			String userNameFromDB = rs.getString("username");
-			String emailFromDB = rs.getString("email");
-			String passwordFromDB = rs.getString("password");
-			String phoneNumberFromDB = rs.getString("phoneno");
-			
-			Admin admin = new Admin(eid,nameFromDB,userNameFromDB,emailFromDB,passwordFromDB,phoneNumberFromDB);
-			
-			return admin;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-
-
 }
+
+	
