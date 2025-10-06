@@ -73,7 +73,7 @@ public class createAccount extends HttpServlet {
 			else {
 				    Account account = Account.createAccount(name, email, password, initialBalance);
 					if(account!=null) {
-						request.setAttribute("msg", "Account created successfully");
+						request.setAttribute("msg", "Account created successfully.\n<h3><b>Account no : </b>"+account.getAccountNumber()+"</h3>");
 						System.out.println(account);
 						doGet(request,response);
 					}

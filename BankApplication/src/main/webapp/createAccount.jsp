@@ -131,9 +131,9 @@ border : 2px solid white;
 
 <button>create account</button>
 <br>
-<p class="message">
+<pre class="message">
     ${msg}
-</p>
+</pre>
 </form>
 </body>
 </html>

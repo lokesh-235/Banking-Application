@@ -7,7 +7,7 @@
 <title>Welcome - Andhra Bank</title>
 
 <style>
-/* ===== Global ===== */
+
 body {
   margin: 0;
   padding: 0;
@@ -19,7 +19,6 @@ body {
   min-height: 100vh;
 }
 
-/* ===== Navbar ===== */
 nav {
   width: 100%;
   background: #111;
@@ -54,7 +53,7 @@ nav ul li a:hover {
   text-shadow: 0 0 8px cyan;
 }
 
-/* ===== Main Welcome Section ===== */
+
 main {
   flex: 1;
   display: flex;
